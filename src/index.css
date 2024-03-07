@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hero{
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6tQuh2NW09DaRWfV-3XyYxWY0vjjYwecBjw&usqp=CAU');
+
+
+  background-size:contain;
+  height: 60vh;
+}
+/* .footer{
+  height: 5rem;
+  width: 100%;
+  position: sticky;
+} */
+.card{
+  width: 30%;
+}
+.wrapper{
+  width: 80%;
+}
+.reg{
+  height: 94vh;
+}
+.reg-card{
+  width: 98% !important;
+  margin: 0 !important;
+}
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+.refer{
+  background-image: url('https://spaceskyx.cloud/banner.jpg');
+  background-size: cover;
+  height: 75vh;
+  width: 100%;
+}
+.app-wrapper {
+  flex: 1;
+}
+
+footer {
+  color: white;
+  text-align: center;
+  position: sticky;
+  bottom: 0;
+}
+
+@media only screen and (max-width: 600px) {
+.abt{
+  width: 95% !important;
+  padding-left: 1rem !important;
+}
+.wrapper{
+  width: 100% !important;
+}
+}
+
+.gradient-custom-3 {
+  /* fallback for old browsers */
+  background: #84fab0;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+}
+
+.gradient-custom-4 {
+  /* fallback for old browsers */
+  background: #84fab0;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+}
