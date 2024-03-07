@@ -36,7 +36,6 @@ const Accounts = () => {
 
     }
     const handleClose2 = () => setOpen2(false);
-useEffect(())
     return (
         <div className=' text-black pt-20 flex w-full items-center p-3 justify-center flex-col'>
             {open2 && (
