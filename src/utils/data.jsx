@@ -1,7 +1,7 @@
 export const data =[
     {
         id: 1,
-        title: "SpaceX Fund - 1",
+        title: "Profit Place",
         price: "30.00",
         DRoi: "0.98",
         dReturn:'30',
@@ -11,7 +11,7 @@ export const data =[
     },
     {
         id: 1,
-        title: "SpaceX Fund - 1",
+        title: "Profit Place",
         price: "100",
         DRoi: "9.8",
         dReturn:'30',
@@ -21,7 +21,7 @@ export const data =[
     },
     {
         id: 1,
-        title: "SpaceX Fund - 1",
+        title: "Profit Place",
         price: "2900",
         DRoi: "10.8",
         dReturn:'30',
@@ -31,7 +31,7 @@ export const data =[
     },
     {
         id: 1,
-        title: "SpaceX Fund - 1",
+        title: "Profit Place",
         price: "30.00",
         DRoi: "0.98",
         dReturn:'30',
@@ -41,7 +41,7 @@ export const data =[
     },
     {
         id: 1,
-        title: "SpaceX Fund - 1",
+        title: "Profit Place",
         price: "100",
         DRoi: "9.8",
         dReturn:'30',
@@ -51,7 +51,7 @@ export const data =[
     },
     {
         id: 1,
-        title: "SpaceX Fund - 1",
+        title: "Profit Place",
         price: "2900",
         DRoi: "10.8",
         dReturn:'30',

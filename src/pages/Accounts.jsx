@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 
 import * as React from 'react';
@@ -6,7 +7,10 @@ import Modal from '@mui/material/Modal';
 
 import { RxCross2 } from "react-icons/rx";
 import { RiArrowRightSFill } from "react-icons/ri";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { updateTour } from '../redux/features/productSlice';
 
 const style = {
     position: 'absolute',
@@ -21,21 +25,66 @@ const style = {
 };
 const Accounts = () => {
     const { user } = useSelector((state) => ({ ...state.auth }));
-
+    const [amount, setMoneu] = React.useState(0)
+console.log(amount);
+    const isValidCode = /^[A-Z0-9]{10}$/.test(amount);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [open1, setOpen1] = React.useState(false);
     const handleOpen1 = () => setOpen1(true);
     const handleClose1 = () => setOpen1(false);
-    const [moneu, setMoneu] = React.useState(0)
     const [open2, setOpen2] = React.useState(false);
     const handleOpen2 = (e) => {
         e.preventDefault()
         setOpen2(true);
-
     }
     const handleClose2 = () => setOpen2(false);
+
+
+const Deposit = (e)=>{
+    e.preventDefault()
+    if(amount<100){
+        toast.warning('Cash must me more than 100')
+
+    }else{
+        setOpen2(true);
+        }
+
+}
+const navigate = useNavigate();
+const { loading, error } = useSelector((state) => ({ ...state.auth }));
+const dispatch = useDispatch();
+const [form, setForm] = React.useState(amount)
+console.log('form,form', form);
+React.useEffect(() => {
+  setForm((prevForm) => ({
+    ...prevForm,
+    amount:amount
+  }));
+}, [amount]);
+const [user1, setUser] = React.useState('');
+console.log(user1); 
+  const handleSubmit1 = (e) => {
+    e?.preventDefault();
+    if (user) {
+      dispatch(updateTour({ form, navigate, toast, id: user?.result?._id }));
+    }
+  };
+  const verify = (e) => {
+    e.preventDefault()
+    // if (isValidCode) {
+        // toast.success('valid')
+        handleSubmit1()
+    // } else {
+    //     toast.warning('invalid code')
+    // }
+}
+React.useEffect(()=>{
+    if(!user){
+        navigate('/login')
+    }
+    },[navigate, user])
     return (
         <div className=' text-black pt-20 flex w-full items-center p-3 justify-center flex-col'>
             {open2 && (
@@ -54,13 +103,13 @@ const Accounts = () => {
                             <RxCross2 onClick={handleClose2} className='cursor-pointer' />
                         </div>
                         <div style={{ width: '80%' }} className="flex abt rounded-lg shadow-xl p-3 justify-between bg-slate-800  flex-col text-white ">
-                            <h5 className='flex justify-between'>Pay amount    <h5>ksh{moneu}.00</h5></h5>
+                            <h5 className='flex justify-between'>Pay amount    <h5>ksh{amount}.00</h5></h5>
                             <h5 className='flex justify-between'>Send to    <h5>peter</h5></h5>
                             <h5 className='flex justify-between'>Phone Number<h5>070000000</h5></h5>
 
                         </div>
                         <div>
-                            <img src="https://web.kineticrango.com/upload/20240207/T20240207091314_16022_thu.jpeg" alt=""/>
+                            <img src="https://web.kineticrango.com/upload/20240207/T20240207091314_16022_thu.jpeg" alt="" />
                         </div>
                         <ul>
                             <li>● Minimum amount to deposit is Ksh100</li>
@@ -68,7 +117,7 @@ const Accounts = () => {
                         </ul>
                         <form className='flex flex-col gap-2' action="">
                             <input className='h-10 text-black w-full border rounded-lg' type="text" required placeholder="Enter the mpesa code" />
-                            <button className="bg-green-400 w-full p-2 rounded-lg">Verify</button>
+                            <button onClick={handleSubmit1} className="bg-green-400 w-full p-2 rounded-lg">Verify</button>
                         </form>
 
                         <button>Check transactions</button>
@@ -99,8 +148,8 @@ const Accounts = () => {
                             <li>● If the fund doesn't reflect to your account seek help from support</li>
                         </ul>
                         <form className='flex flex-col gap-2' action="">
-                            <input onChange={(e) => setMoneu(e.target.value)} className='h-10 text-black w-full border rounded-lg' type="number" placeholder="Enter amount" />
-                            <button onClick={handleOpen2} className="bg-green-400 w-full p-2 rounded-lg">Deposit</button>
+                            <input required onChange={(e) => setMoneu(e.target.value)} className='h-10 text-black w-full border rounded-lg' type="number"  placeholder="Enter amount" />
+                            <button onClick={Deposit} className="bg-green-400 w-full p-2 rounded-lg">Deposit</button>
                         </form>
 
                         <button>Check transactions</button>
@@ -146,9 +195,9 @@ const Accounts = () => {
             </h6>
             <div style={{ width: '90%' }} className="flex abt rounded-lg shadow-xl p-3 justify-between bg-slate-800  flex-wrap items-center">
                 <div style={{ width: '45%' }} className="flex abt items- pl-4 flex-col text-white gap-2 justify-center w-64 ">
-                    <h6>IDENTIFIER: 05856846365</h6>
-                    <p>Balance: ksh 30</p>
-                    <h6>ksh 30.00</h6>
+                    <h6>IDENTIFIER: {user?.result?._id}</h6>
+                    <p>Balance: ksh </p>
+                    <h6>ksh {user?.result?.amount + user?.result?.refer}.00</h6>
                     <button onClick={handleOpen} className="bg-green-400 p-2 rounded-lg">Deposit</button>
                 </div>
                 <div className="flex flex-col abt items-center justify-center pl-1 text-white">
@@ -158,7 +207,7 @@ const Accounts = () => {
                     </div>
                     <h6>Referral Revenue</h6>
                     <div className="flex p-4 text-black items-center justify-center rounded-lg border abt w-64 bg-slate-100 shadow-2xl">
-                        ksh00.00
+                    ksh{ user?.result?.refer}.00
                     </div>
 
                 </div>

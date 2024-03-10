@@ -15,7 +15,7 @@ const Home = () => {
 
                     <div className="flex items- gap-2 justify-center w-64 ">
                         <p>Balance:</p>
-                        <h6 className='pt-1'>ksh {user?.result?.amount}</h6>
+                        <h6 className='pt-1'>ksh {user?.result?.amount + user?.result?.refer}</h6>
                     </div>
                 </div>
                 <button className="bg-green-300 hover:bg-green-600 text-black font-bold py-2 px-4 rounded">

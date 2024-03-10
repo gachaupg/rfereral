@@ -58,30 +58,35 @@ function App() {
   // console.log("Ads:", ads);
 
   const [form, setForm] = useState([])
-  console.log(form);
+  console.log('form,form', form);
   useEffect(() => {
     setForm((prevForm) => ({
       ...prevForm,
       refer: user?.refer + 50,
     }));
-  }, []);
+  }, [user]);
 
+
+  const navigate = useNavigate();
+  const { loading, error } = useSelector((state) => ({ ...state.auth }));
+  const dispatch = useDispatch();
+  const [user1, setUser] = useState(initialState);
+  // console.log(user1); 
   const handleSubmit1 = (e) => {
     e?.preventDefault();
     if (id) {
       dispatch(updateTour({ form, navigate, toast, id: id }));
     }
   };
-  const navigate = useNavigate();
-  const { loading, error } = useSelector((state) => ({ ...state.auth }));
-  const dispatch = useDispatch();
-  const [user1, setUser] = useState(initialState);
-  // console.log(user1);
   const handleSubmit = (e) => {
     e?.preventDefault();
-    if (user1.name);
-    dispatch(register({ user1, navigate, toast }))
-  }
+    if (user1.name && user1.email && user1.phone && user1.password) {
+      dispatch(register({ user1, navigate, toast })).then(() => {
+        handleSubmit1()
+      })
+    }
+  };
+
 
 
   return (
@@ -102,7 +107,6 @@ function App() {
 
           <MDBBtn onClick={() => {
             handleSubmit();
-            handleSubmit1();
           }}
             className='mb-4 w-100 gradient-custom-4' size='lg'>  {loading ? "Submitting" : "Register"}</MDBBtn>
         </MDBCardBody>

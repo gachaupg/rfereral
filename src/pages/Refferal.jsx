@@ -1,14 +1,16 @@
 /* eslint-disable no-unused-vars */
 import { IoCopyOutline } from "react-icons/io5";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const Refferal = () => {   
-     const { user } = useSelector((state) => ({ ...state.auth }));
-const[referral,setReferral]=useState('')
+const Refferal = () => {
+    const { user } = useSelector((state) => ({ ...state.auth }));
+    const navigate = useNavigate()
+    const [referral, setReferral] = useState('')
     const [textToCopy, setTextToCopy] = useState(`http://localhost:5173/register?id=${user?.result?._id}`);
     const [copyStatus, setCopyStatus] = useState('');
-
+    console.log(user);
     const handleCopy = () => {
         navigator.clipboard.writeText(textToCopy)
             .then(() => {
@@ -18,7 +20,11 @@ const[referral,setReferral]=useState('')
                 setCopyStatus('Copy failed!');
             });
     };
-
+    useEffect(() => {
+        if (!user) {
+            navigate('/login')
+        }
+    }, [navigate, user])
     return (
         <>
             <div className='abt refer text-black  flex w-full items- p-3 justify-center pt-64 flex-col'>
